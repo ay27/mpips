@@ -2,24 +2,27 @@ import sys
 from random import randint
 
 from mpi4py import MPI
-import load
+
+from mpips import load
+
 
 class MpiPs(object):
     """
     A parameter server implementation based on PY4MPI.
     """
+
     def __init__(self, ps_num):
         self.comm = MPI.COMM_WORLD
         self.size = self.comm.Get_size()
         self.rank = self.comm.Get_rank()
         self.ps_num = ps_num
         self.group = self.comm.group
-        #make a group for ps
-        self.ps_group = self.group.Range_incl([(0, ps_num-1, 1),])
+        # make a group for ps
+        self.ps_group = self.group.Range_incl([(0, ps_num-1, 1), ])
         self.ps_comm = self.comm.Create(self.ps_group)
         self.ps_group.Free()
-        #make a group for worker
-        self.wk_group = self.group.Range_excl([(0, ps_num-1, 1),])
+        # make a group for worker
+        self.wk_group = self.group.Range_excl([(0, ps_num-1, 1), ])
         self.wk_comm = self.comm.Create(self.wk_group)
         self.wk_group.Free()
 
@@ -37,9 +40,9 @@ class MpiPs(object):
     def end(self):
         self.sync()
         if self.wk_rank == 0:
-            for i in xrange(self.ps_num):
+            for i in range(self.ps_num):
                 self.comm.send("", dest=i, tag=1)
-	self.sync()
+        self.sync()
         sys.exit(0)
 
     def _get_dest_from_key(self, key):
@@ -82,4 +85,3 @@ class MpiPs(object):
 
     def load_input(self, input_file):
         return load.load(input_file, self.wk_rank, self.wk_num)
-        
