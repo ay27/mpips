@@ -1,13 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-
-import sys, time
-
-import sys
-
-# sys.path.append('..')
-# sys.path.append('../mpips/')
-
 from mpips import MpiPs
 import numpy as np
 from scipy.stats import logistic

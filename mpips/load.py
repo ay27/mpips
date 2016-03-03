@@ -1,9 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-
-import os
-
-
 def load(input_file, rank, num):
     # if os.path.isdir(input_file):
     #     return load_dir(input_file, rank, num)

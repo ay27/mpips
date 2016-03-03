@@ -1,5 +1,9 @@
 fork from <https://github.com/ifreyr/mpips>
 
+## Changed:
+1. Change from python2 to python3.
+2. Add launcher.py, make it more easy to run the project.
+
 MpiPs
 =====
 
